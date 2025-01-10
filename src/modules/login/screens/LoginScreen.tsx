@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { BackgroundImage, ContainerLogin, ContainerLoginScreen, LimitedContainer, TitleLogin } from "../styles/loginScreen.styles";
-import axios from "axios";
 import SVGLogo from "../../../shared/components/icons/SVGLogo";
 import Input from "../../../shared/components/inputs/input/input";
 import Button from "../../../shared/components/buttons/button/button";
 import { useRequests } from "../../../shared/hooks/useRequests";
+import { useGlobalContext } from "../../../shared/hooks/useGlobalContext";
 
 const LoginScreen: React.FC = () => {
-
+    const { accessToken, setAccessToken } = useGlobalContext()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const { loading, postRequest } = useRequests()
@@ -21,6 +21,7 @@ const LoginScreen: React.FC = () => {
     }
 
     const handleLogin = () => {
+        setAccessToken("novo token")
         postRequest("http://localhost:8080/auth", {
             email: email,
             password: password
@@ -33,7 +34,7 @@ const LoginScreen: React.FC = () => {
             <ContainerLogin>
                 <LimitedContainer>
                     <SVGLogo />
-                    <TitleLogin level={2} type="secondary">LOGIN</TitleLogin>
+                    <TitleLogin level={2} type="secondary">LOGIN {accessToken}</TitleLogin>
                     <Input title="Usuário" margin="32px 0px 0px" onChange={handleEmail} value={email} />
                     <Input title="Senha" type="password" margin="32px 0px 0px" onChange={handlePassword} value={password} />
                     <Button loading={loading} type="primary" margin="64px 0px 16px 0px" onClick={handleLogin}>ENTRAR</Button>
