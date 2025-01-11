@@ -9,7 +9,7 @@ import { UserType } from "../types/UserType";
 const LoginScreen: React.FC = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { loading, postRequest } = useRequests()
+    const { loading, authRequest } = useRequests()
 
     const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value)
@@ -20,7 +20,7 @@ const LoginScreen: React.FC = () => {
     }
 
     const handleLogin = () => {
-        postRequest<UserType>("http://localhost:8080/auth", {
+        authRequest({
             email: email,
             password: password
         })
