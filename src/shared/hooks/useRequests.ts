@@ -18,15 +18,16 @@ export const useRequests = () => {
             .catch((e) => { alert(e) })
     }
 
-    const postRequest = async (url: string, body: any) => {
+    const postRequest = async <T>(url: string, body: any): Promise<T | undefined> => {
         setLoading(true)
-        const returnData = await connectionAPIPost(url, body)
+        const returnData = await connectionAPIPost<T>(url, body)
             .then((result) => {
                 setNotification("Logado", "success")
                 return result
             })
             .catch((error: Error) => {
                 setNotification(error.message, "error")
+                return undefined
             })
         setLoading(false)
         return returnData
