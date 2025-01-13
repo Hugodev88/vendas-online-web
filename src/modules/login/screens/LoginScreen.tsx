@@ -4,7 +4,6 @@ import SVGLogo from "../../../shared/components/icons/SVGLogo";
 import Input from "../../../shared/components/inputs/input/input";
 import Button from "../../../shared/components/buttons/button/button";
 import { useRequests } from "../../../shared/hooks/useRequests";
-import { UserType } from "../types/UserType";
 
 const LoginScreen: React.FC = () => {
     const [email, setEmail] = useState('')

@@ -12,7 +12,7 @@ import { AuthType } from '../../modules/login/types/AuthType';
 export const useRequests = () => {
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
-    const { setNotification } = useGlobalContext()
+    const { setNotification, setUser } = useGlobalContext()
 
     const getRequest = async (url: string) => {
         setLoading(true)
@@ -44,6 +44,7 @@ export const useRequests = () => {
         setLoading(true)
         await connectionAPIPost<AuthType>(URL_AUTH, body)
             .then((result) => {
+                setUser(result.user)
                 setAuthorizationToken(result.accessToken)
                 setNotification("Logado com sucesso.", "success")
                 navigate(ProductRoutesEnum.PRODUCT)
