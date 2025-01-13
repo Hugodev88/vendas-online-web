@@ -10,7 +10,6 @@ import { AuthType } from '../../modules/login/types/AuthType';
 
 export const useRequests = () => {
     const [loading, setLoading] = useState(false)
-    const navigate = useNavigate()
     const { setNotification, setUser } = useGlobalContext()
 
     const request = async <T>(url: string, method: MethodType, saveGlobal?: (object: T) => void, body?: any): Promise<T | undefined> => {
@@ -32,6 +31,7 @@ export const useRequests = () => {
     }
 
     const authRequest = async (body: any): Promise<void> => {
+        const navigate = useNavigate()
         setLoading(true)
         await connectionAPIPost<AuthType>(URL_AUTH, body)
             .then((result) => {
