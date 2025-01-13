@@ -6,15 +6,15 @@ interface CategoryColumnProps {
 }
 
 const colors: string[] = [
-    'magenta',
-    'red',
     'volcano',
-    'orange',
+    'red',
     'gold',
+    'blue',
+    'orange',
     'lime',
     'green',
     'cyan',
-    'blue',
+    'magenta',
     'geekblue',
     'purple',
 ]
