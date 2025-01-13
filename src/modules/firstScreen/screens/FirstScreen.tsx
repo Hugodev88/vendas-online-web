@@ -1,32 +1,19 @@
 import { Spin } from "antd"
 import { useEffect } from "react"
-import { getAuthorizationToken, unSetAuthorizationToken } from "../../../shared/functions/connection/auth"
 import { useNavigate } from "react-router-dom"
+import { useGlobalContext } from "../../../shared/hooks/useGlobalContext"
 import { ProductRoutesEnum } from "../../product/routes"
-import { LoginRoutesEnum } from "../../login/routes"
-import { connectionAPIGet } from "../../../shared/functions/connection/connectionAPI"
-import { URL_USER } from "../../../shared/constants/urls"
 
 const FirstScreen = () => {
+    const { user } = useGlobalContext()
     const navigate = useNavigate()
 
     useEffect(() => {
 
-        const verifyToken = async () => {
-            const token = getAuthorizationToken()
-
-            if (token) {
-                await connectionAPIGet(URL_USER).then(() => {
-                    navigate(ProductRoutesEnum.PRODUCT)
-                }).catch(() => {
-                    unSetAuthorizationToken()
-                    navigate(LoginRoutesEnum.LOGIN)
-                })
-            } else {
-                navigate(LoginRoutesEnum.LOGIN)
-            }
+        if (user) {
+            navigate(ProductRoutesEnum.PRODUCT)
         }
-        verifyToken()
+
     }, [])
 
     return <Spin></Spin>
