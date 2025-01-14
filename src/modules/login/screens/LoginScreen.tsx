@@ -4,8 +4,10 @@ import SVGLogo from "../../../shared/components/icons/SVGLogo";
 import Input from "../../../shared/components/inputs/input/input";
 import Button from "../../../shared/components/buttons/button/button";
 import { useRequests } from "../../../shared/hooks/useRequests";
+import { useNavigate } from "react-router-dom";
 
 const LoginScreen: React.FC = () => {
+    const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const { loading, authRequest } = useRequests()
@@ -20,7 +22,7 @@ const LoginScreen: React.FC = () => {
 
     const handleLogin = () => {
         console.log('handleLogin')
-        authRequest({
+        authRequest(navigate, {
             email: email,
             password: password,
         })

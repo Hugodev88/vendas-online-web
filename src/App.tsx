@@ -3,7 +3,7 @@ import { loginRoutes } from "./modules/login/routes";
 import { useNotification } from "./shared/hooks/useNotification";
 import { firstScreenRoutes } from "./modules/firstScreen/routes";
 import { productScreenRoutes } from "./modules/product/routes";
-import { verifyLoggedIn } from "./shared/functions/connection/auth";
+import { getAuthorizationToken, verifyLoggedIn } from "./shared/functions/connection/auth";
 import { useRequests } from "./shared/hooks/useRequests";
 import { useEffect } from "react";
 import { URL_USER } from "./shared/constants/urls";
@@ -24,7 +24,10 @@ function App() {
 	const { request } = useRequests()
 
 	useEffect(() => {
-		request(URL_USER, MethodsEnum.GET, setUser)
+		const token = getAuthorizationToken()
+		if (token) {
+			request(URL_USER, MethodsEnum.GET, setUser)
+		}
 	}, [])
 
 	return (

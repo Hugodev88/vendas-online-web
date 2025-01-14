@@ -3,10 +3,10 @@ import { useGlobalContext } from './useGlobalContext';
 import ConnectionAPI, { connectionAPIPost, MethodType } from '../functions/connection/connectionAPI';
 import { URL_AUTH } from '../constants/urls';
 import { ERROR_INVALID_PASSWORD } from '../constants/errosStatus';
-import { useNavigate } from 'react-router-dom';
-import { ProductRoutesEnum } from '../../modules/product/routes';
+import { NavigateFunction } from 'react-router-dom';
 import { setAuthorizationToken } from '../functions/connection/auth';
 import { AuthType } from '../../modules/login/types/AuthType';
+import { FirstScreenRoutesEnum } from '../../modules/firstScreen/routes';
 
 export const useRequests = () => {
     const [loading, setLoading] = useState(false)
@@ -30,7 +30,7 @@ export const useRequests = () => {
         return returnObject
     }
 
-    const authRequest = async (body: any): Promise<void> => {
+    const authRequest = async (navigate: NavigateFunction, body: any): Promise<void> => {
         console.log('authRequest')
         // const navigate = useNavigate()
         console.log('navigate')
@@ -40,8 +40,8 @@ export const useRequests = () => {
                 setUser(result.user)
                 setAuthorizationToken(result.accessToken)
                 setNotification("Logado com sucesso.", "success")
-                // navigate(ProductRoutesEnum.PRODUCT)
-                window.location.href = ProductRoutesEnum.PRODUCT
+                navigate(FirstScreenRoutesEnum.FIRST_SCREEN)
+                // window.location.href = ProductRoutesEnum.PRODUCT 
                 return result
             })
             .catch(() => {
