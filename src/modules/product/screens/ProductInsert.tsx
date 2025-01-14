@@ -4,12 +4,11 @@ import Input from "../../../shared/components/inputs/input/input"
 import Button from "../../../shared/components/buttons/button/button"
 import Select from "../../../shared/components/inputs/select/select"
 import { LimitedContainer } from "../../../shared/components/styles/limited.styled"
-import { DisplayFlexJustifyRight } from "../../../shared/components/styles/display.styled"
+import { DisplayFlexJustifyCenter, DisplayFlexJustifyRight } from "../../../shared/components/styles/display.styled"
 import { useNavigate } from "react-router-dom"
 import InputMoney from "../../../shared/components/inputs/inputMoney/inputMoney"
 import { useInsertProduct } from "../hooks/useInsertProduct"
 import { useCategory } from "../../category/hooks/useCategory"
-import { ProductInsertContainer } from "../styles/productInsert.style"
 
 const ProductInsert = () => {
 
@@ -35,7 +34,7 @@ const ProductInsert = () => {
 				name: 'INSERIR PRODUTO',
 			},
 		]}>
-			<ProductInsertContainer>
+			<DisplayFlexJustifyCenter>
 				<LimitedContainer width={400}>
 					<Input onChange={(e) => onChangeInput(e, 'name', false)} value={product.name} margin="0px 0px 16px 0" title="Nome" placeholder="Nome" />
 					<Input onChange={(e) => onChangeInput(e, 'image', false)} value={product.image} margin="0px 0px 16px 0" title="Url imagem" placeholder="Url imagem" />
@@ -60,7 +59,7 @@ const ProductInsert = () => {
 						</LimitedContainer>
 					</DisplayFlexJustifyRight>
 				</LimitedContainer>
-			</ProductInsertContainer>
+			</DisplayFlexJustifyCenter>
 		</Screen >
 	)
 }
