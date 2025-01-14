@@ -19,9 +19,10 @@ const LoginScreen: React.FC = () => {
     }
 
     const handleLogin = () => {
+        console.log('handleLogin')
         authRequest({
             email: email,
-            password: password
+            password: password,
         })
     }
 

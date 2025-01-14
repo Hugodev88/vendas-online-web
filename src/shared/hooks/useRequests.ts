@@ -31,14 +31,17 @@ export const useRequests = () => {
     }
 
     const authRequest = async (body: any): Promise<void> => {
-        const navigate = useNavigate()
+        console.log('authRequest')
+        // const navigate = useNavigate()
+        console.log('navigate')
         setLoading(true)
         await connectionAPIPost<AuthType>(URL_AUTH, body)
             .then((result) => {
                 setUser(result.user)
                 setAuthorizationToken(result.accessToken)
                 setNotification("Logado com sucesso.", "success")
-                navigate(ProductRoutesEnum.PRODUCT)
+                // navigate(ProductRoutesEnum.PRODUCT)
+                window.location.href = ProductRoutesEnum.PRODUCT
                 return result
             })
             .catch(() => {

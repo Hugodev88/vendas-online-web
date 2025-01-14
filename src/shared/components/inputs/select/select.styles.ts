@@ -3,11 +3,10 @@ import { Typography } from 'antd'
 
 const { Text } = Typography
 
-export const BoxInput = styled.div`
-width: 100%;
+export const BoxSelect = styled.div` 
+    width: 100%;
 `;
 
-export const TitleInput = styled(Text)`
+export const TitleSelect = styled(Text)`
     margin: 8px;
-    font-weight: bold;
 `;
