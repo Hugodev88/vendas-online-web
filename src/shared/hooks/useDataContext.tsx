@@ -1,8 +1,10 @@
 import { createContext, useContext, useState } from 'react';
 import { ProductType } from '../types/ProductType';
+import { CategoryType } from '../types/CategoryType';
 
 interface DataContext {
     products?: ProductType[];
+    categories?: CategoryType[];
 }
 
 interface DataContextProps {
@@ -35,8 +37,17 @@ export const useDataContext = () => {
         })
     }
 
+    const setCategories = (categories: CategoryType[]) => {
+        setData({
+            ...data,
+            categories,
+        })
+    }
+
     return {
         products: data?.products || [],
+        categories: data?.categories || [],
         setProducts,
+        setCategories,
     };
 };
