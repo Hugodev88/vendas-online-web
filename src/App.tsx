@@ -9,9 +9,10 @@ import { useEffect } from "react";
 import { URL_USER } from "./shared/constants/urls";
 import { MethodsEnum } from "./shared/enums/methods.enum";
 import { useGlobalContext } from "./shared/hooks/useGlobalContext";
+import { categoryScreenRoutes } from "./modules/category/routes";
 
 const routes: RouteObject[] = [...loginRoutes];
-const routesLoggedIn: RouteObject[] = [...firstScreenRoutes, ...productScreenRoutes].map((route) => ({
+const routesLoggedIn: RouteObject[] = [...firstScreenRoutes, ...categoryScreenRoutes, ...productScreenRoutes].map((route) => ({
 	...route,
 	loader: verifyLoggedIn
 }))
