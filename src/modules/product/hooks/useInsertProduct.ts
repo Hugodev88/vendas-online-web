@@ -33,7 +33,7 @@ export const useInsertProduct = () => {
         })
     }
 
-    const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>, nameObject: string, isNumber: boolean) => {
+    const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>, nameObject: string, isNumber?: boolean) => {
         setProduct({
             ...product,
             [nameObject]: isNumber ? Number(e.target.value) : e.target.value
