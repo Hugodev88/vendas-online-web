@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react"
 import Header from "../Header"
-import { HeaderTestIdEnum } from "../HeaderTestIdEnum"
+import { HeaderTestIdEnum } from "../enum/HeaderTestIdEnum"
 import { logout } from "../../../functions/connection/auth"
 
 jest.mock('react-router-dom', () => ({

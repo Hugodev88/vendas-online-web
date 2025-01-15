@@ -4,7 +4,7 @@ import { logout } from "../../functions/connection/auth"
 import { HeaderContainer, LogoExit } from "./header.style"
 import { Modal } from "antd"
 import { useNavigate } from "react-router-dom"
-import { HeaderTestIdEnum } from "./HeaderTestIdEnum"
+import { HeaderTestIdEnum } from "./enum/HeaderTestIdEnum"
 
 const Header = () => {
     const navigate = useNavigate()
