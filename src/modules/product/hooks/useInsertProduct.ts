@@ -2,14 +2,14 @@ import { useEffect, useState } from "react"
 import { InsertProductDto } from "../../../shared/dtos/InsertProduct.dto"
 import { connectionAPIPost } from "../../../shared/functions/connection/connectionAPI"
 import { URL_PRODUCT } from "../../../shared/constants/urls"
-import { useGlobalContext } from "../../../shared/hooks/useGlobalContext"
 import { useNavigate } from "react-router-dom"
 import { ProductRoutesEnum } from "../routes"
+import { useGlobalReducer } from "../../../store/reducers/globalReducer/useGlobalReducer"
 
 export const useInsertProduct = () => {
     const [loading, setLoading] = useState(false)
     const [disabledButton, setDisabledButton] = useState(true)
-    const { setNotification } = useGlobalContext()
+    const { setNotification } = useGlobalReducer()
     const navigate = useNavigate()
 
     const [product, setProduct] = useState<InsertProductDto>({

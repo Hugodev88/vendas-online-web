@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
-import { useDataContext } from "../../../shared/hooks/useDataContext"
 import { useRequests } from "../../../shared/hooks/useRequests"
 import { URL_CATEGORY } from "../../../shared/constants/urls"
 import { MethodsEnum } from "../../../shared/enums/methods.enum"
+import { useCategoryReducer } from "../../../store/reducers/categoryReducer/useCategoryReducer"
 
 export const useCategory = () => {
-    const { categories, setCategories } = useDataContext()
+    const { categories, setCategories } = useCategoryReducer()
     const [categoriesFiltered, setCategoriesFiltered] = useState(categories)
     const { request } = useRequests()
 
