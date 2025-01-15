@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { useDataContext } from "../../../shared/hooks/useDataContext"
 import { useRequests } from "../../../shared/hooks/useRequests"
 import { MethodsEnum } from "../../../shared/enums/methods.enum"
 import { ProductType } from "../../../shared/types/ProductType"
@@ -16,6 +15,7 @@ import { ProductRoutesEnum } from "../routes"
 import Search from "antd/es/input/Search"
 import { LimitedContainer } from "../../../shared/components/styles/limited.styled"
 import { DisplayFlexJustifyBetween } from "../../../shared/components/styles/display.styled"
+import { useProductReducer } from "../../../store/reducers/productReducer/useProductReducer"
 
 const columns: ColumnsType<ProductType> = [
     {
@@ -55,7 +55,8 @@ const listBreadcrumb = [
 ]
 
 const Product = () => {
-    const { products, setProducts } = useDataContext()
+    const { products, setProducts } = useProductReducer()
+
     const [productsFiltered, setProductsFiltered] = useState<ProductType[]>([])
     const { request } = useRequests()
     const navigate = useNavigate()
