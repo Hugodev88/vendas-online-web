@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDataContext } from "../../../shared/hooks/useDataContext"
 import { useRequests } from "../../../shared/hooks/useRequests"
 import { URL_CATEGORY } from "../../../shared/constants/urls"
@@ -6,6 +6,7 @@ import { MethodsEnum } from "../../../shared/enums/methods.enum"
 
 export const useCategory = () => {
     const { categories, setCategories } = useDataContext()
+    const [categoriesFiltered, setCategoriesFiltered] = useState(categories)
     const { request } = useRequests()
 
     useEffect(() => {
@@ -14,8 +15,21 @@ export const useCategory = () => {
         }
     }, [])
 
+    useEffect(() => {
+        setCategoriesFiltered([...categories])
+    }, [categories])
+
+    const handleOnChangeSearch = (value: string) => {
+        if (!value) {
+            setCategoriesFiltered([...categories])
+        } else {
+            setCategoriesFiltered([...categories.filter((category) => category.name.toUpperCase().includes(value.toUpperCase()))])
+        }
+    }
+
     return {
-        categories
+        categories: categoriesFiltered,
+        handleOnChangeSearch,
     }
 
 }

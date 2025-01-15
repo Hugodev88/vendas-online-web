@@ -11,9 +11,7 @@ import { useInsertProduct } from "../hooks/useInsertProduct"
 import { useCategory } from "../../category/hooks/useCategory"
 
 const ProductInsert = () => {
-
 	const { product, loading, disabledButton, onChangeInput, handleInsertProduct, handleChangeSelect } = useInsertProduct()
-
 	const { categories } = useCategory()
 	const navigate = useNavigate()
 
