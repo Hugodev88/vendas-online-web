@@ -3,6 +3,8 @@ import Screen from "../../../shared/components/screen/Screen"
 import { useOrder } from "../hooks/useOrder"
 import { OrderType } from "../../../shared/types/OrderType"
 import Table from "../../../shared/components/table/Table"
+import { useNavigate } from "react-router-dom"
+import { OrderRoutesEnum } from "../routes"
 
 const columns: ColumnsType<OrderType> = [
     {
@@ -43,11 +45,14 @@ const listBreadcrumb = [
 ]
 
 const Order = () => {
-
     const { orders } = useOrder()
+    const navigate = useNavigate()
+
     return (
         <Screen listBreadcrumb={listBreadcrumb}>
-            <Table columns={columns} dataSource={orders} />
+            <Table onRow={() => ({
+                onClick: () => navigate(OrderRoutesEnum.ORDER_ID)
+            })} columns={columns} dataSource={orders} />
         </Screen>
     )
 }
