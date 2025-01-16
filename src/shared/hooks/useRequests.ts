@@ -31,9 +31,7 @@ export const useRequests = () => {
     }
 
     const authRequest = async (navigate: NavigateFunction, body: any): Promise<void> => {
-        console.log('authRequest')
         // const navigate = useNavigate()
-        console.log('navigate')
         setLoading(true)
         await connectionAPIPost<AuthType>(URL_AUTH, body)
             .then((result) => {
@@ -41,7 +39,8 @@ export const useRequests = () => {
                 setAuthorizationToken(result.accessToken)
                 setNotification("Logado com sucesso.", "success")
                 navigate(FirstScreenRoutesEnum.FIRST_SCREEN)
-                // window.location.href = ProductRoutesEnum.PRODUCT 
+                // window.location.href = ProductRoutesEnum.PRODUCT
+
                 return result
             })
             .catch(() => {

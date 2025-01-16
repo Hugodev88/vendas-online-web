@@ -10,6 +10,9 @@ import { DisplayFlexJustifyBetween, DisplayFlexJustifyCenter } from "../../../sh
 import { LimitedContainer } from "../../../shared/components/styles/limited.styled"
 import Search from "antd/es/input/Search"
 import Button from "../../../shared/components/buttons/button/button"
+import { getUserInfoByToken } from "../../../shared/functions/connection/auth"
+import { useMemo } from "react"
+import { UserTypeEnum } from "../../../shared/enums/user-type.enum"
 
 const columns: ColumnsType<UserType> = [
     {
@@ -57,6 +60,7 @@ const listBreadcrumb = [
 const Customer = () => {
     const { users, loading, handleOnChangeSearch } = useUser()
     const navigate = useNavigate()
+    const userToken = useMemo(() => getUserInfoByToken(), [])
 
     return (
 
@@ -67,8 +71,10 @@ const Customer = () => {
                         <LimitedContainer width={240}>
                             <Search placeholder="Buscar cliente" onSearch={handleOnChangeSearch} enterButton />
                         </LimitedContainer>
-                        <LimitedContainer width={120}>
-                            <Button type="primary" onClick={() => null}>INSERIR</Button>
+                        <LimitedContainer width={180}>
+                            {userToken?.typeUser === UserTypeEnum.Root && (
+                                <Button type="primary" onClick={() => null}>Inserir Admin</Button>
+                            )}
                         </LimitedContainer>
                     </DisplayFlexJustifyBetween>
                     <Table onRow={() => ({
