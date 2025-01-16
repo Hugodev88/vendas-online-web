@@ -6,6 +6,9 @@ import { useOrderDetail } from "../hooks/useOrderDetail";
 import { DisplayFlexJustifyCenter } from "../../../shared/components/styles/display.styled";
 import ListOrderProduct from "../components/ListOrderProduct";
 import { convertNumberToMoney } from "../../../shared/functions/money";
+import { insertMaskInCpf } from "../../../shared/functions/cpf";
+import { insertMaskInPhone } from "../../../shared/functions/phone";
+import { insertMaskInCep } from "../../../shared/functions/cep";
 
 const OrderDetail = () => {
     const { orderId } = useParams<{ orderId: string }>()
@@ -29,13 +32,13 @@ const OrderDetail = () => {
         {
             key: '3',
             label: 'Telefone',
-            children: `${order?.user.phone}`,
+            children: `${order?.user.phone ? insertMaskInPhone(order.user.phone) : ''}`,
             span: 2,
         },
         {
             key: '4',
             label: 'CPF',
-            children: `${order?.user.cpf}`,
+            children: `${order?.user.cpf ? insertMaskInCpf(order.user.cpf) : ''}`,
             span: 2,
         },
     ]
@@ -96,7 +99,7 @@ const OrderDetail = () => {
         },
         {
             label: 'CEP',
-            children: `${order?.address?.cep}`,
+            children: `${order?.address?.cep ? insertMaskInCep(order.address.cep) : ''}`,
             span: 1,
         },
     ];
