@@ -5,7 +5,7 @@ import { MethodsEnum } from "../../../shared/enums/methods.enum"
 import { URL_ORDER } from "../../../shared/constants/urls"
 
 export const useOrderDetail = (orderId?: string) => {
-    const { request } = useRequests()
+    const { request, loading } = useRequests()
     const { order, setOrder } = useOrderReducer()
 
     useEffect(() => {
@@ -14,7 +14,7 @@ export const useOrderDetail = (orderId?: string) => {
         }
     }, [])
 
-    return { order }
+    return { order, loading }
 
 }
 
