@@ -14,6 +14,9 @@ export const useOrderDetail = (orderId?: string) => {
         }
     }, [])
 
+    console.log(order?.ordersProduct, 'order?.orderProduct')
+    console.log(order, 'order')
+
     return { order, loading }
 
 }

@@ -4,14 +4,14 @@ import { OrderRoutesEnum } from "../routes";
 import { useParams } from "react-router-dom";
 import { useOrderDetail } from "../hooks/useOrderDetail";
 import { DisplayFlexJustifyCenter } from "../../../shared/components/styles/display.styled";
+import ListOrderProduct from "../components/ListOrderProduct";
+import { convertNumberToMoney } from "../../../shared/functions/money";
 
 const OrderDetail = () => {
     const { orderId } = useParams<{ orderId: string }>()
     const { order, loading } = useOrderDetail(orderId)
 
-    console.log(order)
-
-    console.log(order?.user.name);
+    console.log(order?.ordersProduct)
 
     const userData: DescriptionsProps['items'] = [
         {
@@ -44,19 +44,19 @@ const OrderDetail = () => {
         {
             key: '7',
             label: 'Preço',
-            children: `${order?.payment?.price}`,
+            children: `${convertNumberToMoney(order?.payment?.price || 0)}`,
             span: 2,
         },
         {
             key: '8',
             label: 'Desconto',
-            children: `${order?.payment?.discount}`,
+            children: `${convertNumberToMoney(order?.payment?.discount || 0)}`,
             span: 2,
         },
         {
             key: '9',
             label: 'Preço final',
-            children: `${order?.payment?.finalPrice}`,
+            children: `${convertNumberToMoney(order?.payment?.finalPrice || 0)}`,
             span: 2,
         },
         {
@@ -75,24 +75,29 @@ const OrderDetail = () => {
 
     const addressData: DescriptionsProps['items'] = [
         {
-            key: '10',
-            label: 'Config Info',
-            children: (
-                <>
-                    Data disk type: MongoDB
-                    <br />
-                    Database version: 3.4
-                    <br />
-                    Package: dds.mongo.mid
-                    <br />
-                    Storage space: 10 GB
-                    <br />
-                    Replication factor: 3
-                    <br />
-                    Region: East China 1
-                    <br />
-                </>
-            ),
+            label: 'Cidade',
+            children: `${order?.address?.city?.name}`,
+            span: 1,
+        },
+        {
+            label: 'Estado',
+            children: `${order?.address?.city?.state?.name}`,
+            span: 1,
+        },
+        {
+            label: 'Complemento',
+            children: `${order?.address?.complement}`,
+            span: 1,
+        },
+        {
+            label: 'Número',
+            children: `${order?.address?.numberAddress}`,
+            span: 1,
+        },
+        {
+            label: 'CEP',
+            children: `${order?.address?.cep}`,
+            span: 1,
         },
     ];
 
@@ -118,7 +123,7 @@ const OrderDetail = () => {
                     <Divider />
                     <Descriptions title="Dados do endereço" bordered items={addressData} />
                     <Divider />
-                    <Descriptions title="Produtos" bordered items={userData} />
+                    <ListOrderProduct ordersProduct={order.ordersProduct} />
                 </>
             }
 
