@@ -1,6 +1,8 @@
 import { Badge, Descriptions, DescriptionsProps } from "antd";
 import Screen from "../../../shared/components/screen/Screen"
 import { OrderRoutesEnum } from "../routes";
+import { useParams } from "react-router-dom";
+import { useOrderDetail } from "../hooks/useOrderDetail";
 
 const userData: DescriptionsProps['items'] = [
     {
@@ -76,8 +78,12 @@ const userData: DescriptionsProps['items'] = [
     },
 ];
 
-
 const OrderDetail = () => {
+    const { orderId } = useParams<{ orderId: string }>()
+    const { order } = useOrderDetail(orderId)
+
+    console.log(order)
+
     return (
         <Screen listBreadcrumb={[
             {
