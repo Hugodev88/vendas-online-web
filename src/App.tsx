@@ -10,9 +10,10 @@ import { URL_USER } from "./shared/constants/urls";
 import { MethodsEnum } from "./shared/enums/methods.enum";
 import { categoryScreenRoutes } from "./modules/category/routes";
 import { useGlobalReducer } from "./store/reducers/globalReducer/useGlobalReducer";
+import { orderScreenRoutes } from "./modules/orders/routes";
 
 const routes: RouteObject[] = [...loginRoutes];
-const routesLoggedIn: RouteObject[] = [...firstScreenRoutes, ...categoryScreenRoutes, ...productScreenRoutes].map((route) => ({
+const routesLoggedIn: RouteObject[] = [...firstScreenRoutes, ...orderScreenRoutes, ...categoryScreenRoutes, ...productScreenRoutes].map((route) => ({
 	...route,
 	loader: verifyLoggedIn
 }))
